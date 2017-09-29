@@ -16,15 +16,21 @@ class transactionsController {
 
     async createTransaction(ctx){
         let cardId = Number(ctx.params['id']);
-        let data = await this.Model.create({"id": 3,
-            "cardId": 1,
-            "type": "prepaidCard",
-            "data": "220003000000003",
-            "time": "2017-08-9T05:28:31+03:00",
-            "sum": "4000"});
-
-        return ctx.body = "dct ok";
+        let cardsModel = await require('./../models/cardsModel');
+        let cards = new cardsModel();
+        let cardInfo = await cards.getOne(Number(cardId));
+        let data = {
+            "id":0,
+	        "cardId": cardId,
+	        "type": "prepaidCard",
+	        "data": cardInfo.cardNumber,
+	        "time": "2017-08-9T05:28:31+03:00",
+	        "sum": "4000"
+        };
+        let create = await this.Model.create(data);
+        return ctx.body = "все ok";
     }
+
     generatePage(info){
         let list = '<ul>';
         for(let transaction of info){
