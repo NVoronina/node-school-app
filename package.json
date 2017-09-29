@@ -1,0 +1,35 @@
+{
+  "name": "node-school-wallet-app",
+  "version": "1.0.0",
+  "description": "Приложение школы Node.js «Кошелёк»",
+  "author": "",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:NVoronina/node-school-app.git"
+  },
+  "license": "ISC",
+  "engines": {
+    "node": "^8.2"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-loader": "^7.1.2",
+    "body-parser": "^1.18.1",
+    "co": "^4.6.0",
+    "eslint": "^4.7.2",
+    "express": "^4.15.4",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "koa-static": "^4.0.1",
+    "request": "^2.82.0"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.6.0"
+  }
+}
