@@ -22,10 +22,17 @@ class transactionsModel{
         }
         return this.jsonFile;
     }
+    async generateId(){
+	    if(this.jsonFile === false) {
+		    await this.loadFile();
+	    }
+        let id = this.jsonFile[this.jsonFile.length -1].id;
+        return ++id;
+    }
     async get(cardId){
-        if(this.jsonFile === false){
-            await this.loadFile();
-        }
+	    if(this.jsonFile === false) {
+		    await this.loadFile();
+	    }
         let data = [];
         for(let transactions of this.jsonFile){
             if(transactions.cardId === cardId){
@@ -35,14 +42,22 @@ class transactionsModel{
         return data;
     }
     async create(data){
-        if(this.jsonFile === false){
-            await this.loadFile();
+	    if(this.jsonFile === false) {
+		    await this.loadFile();
+	    }
+	    data.id = await this.generateId();
+	    this.jsonFile.push(data);
+	    try {
+		    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile),(err) => {
+			    if (err) throw err;
+			    console.log('done');
+		    });
+	    }catch(error) {
+	        console.log('error ' + error);
         }
-        this.jsonFile.push(data);
-        await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile));
     }
     remove(){
-         return console.log("Попытка удаления транзакции");
+         throw new Error("Попытка удаления транзакции");
     }
 }
 module.exports = transactionsModel;

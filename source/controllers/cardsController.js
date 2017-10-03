@@ -56,6 +56,7 @@ class cardsController {
         }
         return check;
     }
+    // temporary function
     generatePage(){
         let list = '<ul>';
         for(let card of this.list){

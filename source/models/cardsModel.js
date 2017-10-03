@@ -27,12 +27,31 @@ class cardsModel {
         await this.loadFile();
         return this.jsonFile;
     }
+	async getOne(cardId){
+		if(this.jsonFile === false) {
+			await this.loadFile();
+		}
+		let data = {};
+		for(let key in this.jsonFile){
+			if(Number(key) === cardId){
+                data = JSON.stringify(this.jsonFile[key]);
+			}
+		}
+		return data;
+	}
     async addOne(data){
         if(this.jsonFile === false) {
             await this.loadFile();
         }
         this.jsonFile.push(data);
-        await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile));
+	    try {
+		    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile),(err) => {
+			    if (err) throw err;
+			    console.log('done');
+		    });
+	    }catch(error) {
+		    console.log('error ' + error);
+	    }
     }
 
     async deleteOne(id){

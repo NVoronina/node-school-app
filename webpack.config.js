@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 //const presets = require('');
-//npm install eslint-loader postcss-loader style-loader css-loader babel-loader babel-core babel-preset-env html-webpack-plugin eslint-config-airbnb webpack --no-bin-links
+//npm install eslint-plugin-import eslint-plugin-react eslint-loader postcss-loader style-loader css-loader babel-loader babel-core babel-preset-env html-webpack-plugin eslint-config-airbnb eslint-plugin-jsx-a11y webpack --save-dev --no-bin-links
 var webpack = require('webpack');
 
 module.exports = {
@@ -23,7 +23,16 @@ module.exports = {
                         presets: ['env']
                     }
                 }]
-            }
+            },
+	        {
+		        test: /\.js$/,
+		        exclude: /node_modules/,
+		        loader: "eslint-loader",
+		        options: {
+			        // eslint options (if necessary)
+		        }
+	        }
+
         ]
     },
 
