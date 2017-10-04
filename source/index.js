@@ -9,31 +9,34 @@ const Router = require('koa-router');
 const router = new Router();
 const cardsController = require('./controllers/cardsController');
 const transactionsController = require('./controllers/transactionsController');
+const controllerCards = new cardsController();
+const controllerTransactions = new transactionsController();
+const fs = require('fs');
+
 // Сохраним параметр id в ctx.params.id
 router.param('id', (id, ctx, next) => next());
 app.use(bodyParser);
+//  main page
+router.get('/', function (ctx)  {
+	ctx.body = fs.readFileSync('../public/index.html', 'utf8');
+});
 
 // cards
 router.get('/cards/', async function(ctx){
-    const controllerCards = new cardsController();
     await controllerCards.getCardsList(ctx);
 });
 router.post('/cards/', async function(ctx){
-    const controllerCards = new cardsController();
     await controllerCards.addNewCard(ctx);
 });
 
 router.get('/delete/:id', async function(ctx){
-    const controllerCards = new cardsController();
     await controllerCards.deleteOneCard(ctx);
 });
 // transactions
 router.get('/cards/:id/transactions/', async function(ctx){
-    const controllerTransactions = new transactionsController();
     await controllerTransactions.getAllCardTransactions(ctx);
 });
 router.post('/cards/:id/transactions/', async function(ctx){
-    const controllerTransactions = new transactionsController();
     await controllerTransactions.createTransaction(ctx);
 });
 
@@ -58,7 +61,7 @@ app.use(async (ctx, next) => {
     }
 
 });
-
+app.use(serve('../public'));
 
 app.listen(3000, () => {
     console.log('Application started');

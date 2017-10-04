@@ -1,4 +1,32 @@
-[{"cardNumber":"6543209876192876","balance":"500"},
-  {"cardNumber":"8763098726530000","balance":"2000"},
-  {"cardNumber":"8888777799990000","balance":"4444"},
-  {"cardNumber":"1234123412341234","balance":"555"},{"cardNumber":"1234123312341234","balance":"222"},{"cardNumber":"5555444433332222","balance":"32"},{"cardNumber":"4444555566667777","balance":"343"}]
+[
+{
+"id": 1,
+"cardNumber": "546925000000000",
+"balance": "231310"
+},
+{
+"id": 2,
+"cardNumber": "676230000000000",
+"balance": "0"
+},
+{
+"id": 3,
+"cardNumber": "405870000000000",
+"balance": "700"
+},
+{
+"id": 4,
+"cardNumber": "550064000000000",
+"balance": "2"
+},
+{
+"id": 5,
+"cardNumber": "437784000000000",
+"balance": "4545"
+},
+{
+"id": 6,
+"cardNumber": "676803000000000",
+"balance": "120"
+}
+]

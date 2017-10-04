@@ -10,7 +10,7 @@ class cardsController {
     }
     async getCardsList(ctx) {
         this.list = await this.Model.getList();
-        return ctx.body = this.generatePage();
+        return ctx.body = this.list;
     }
     async addNewCard(ctx) {
         let data = ctx.request.body;
@@ -57,7 +57,7 @@ class cardsController {
         return check;
     }
     // temporary function
-    generatePage(){
+    /*generatePage(){
         let list = '<ul>';
         for(let card of this.list){
             list += `<li>
@@ -74,7 +74,7 @@ class cardsController {
             '<input type="submit">' +
             '</form>';
         return list;
-    }
+    }*/
 
 }
 module.exports = cardsController;
