@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
+import axios from 'axios';
 
 import {Island, Title, Button, Input} from './';
 
@@ -103,19 +104,28 @@ class MobilePaymentContract extends Component {
 	 * Отправка формы
 	 * @param {Event} event событие отправки формы
 	 */
-	handleSubmit(event) {
+	onSubmitForm(event) {
 		if (event) {
 			event.preventDefault();
 		}
-
 		const {sum, phoneNumber, commission} = this.state;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum === 0) {
 			return;
+		} else {
+			let amount = Number(sum) + Number(commission);
+			axios
+				.post(`/cards/${this.props.activeCard.id}/pay/`, {
+				type: 'paymentMobile',
+				amount: amount,
+				data: phoneNumber
+				})
+				.then(() => this.props.onPaymentSuccess({sum, phoneNumber, commission}))
+				.catch(function (error) {
+					console.log(error);
+				});
 		}
-
-		this.props.onPaymentSuccess({sum, phoneNumber, commission});
 	}
 
 	/**
@@ -145,7 +155,7 @@ class MobilePaymentContract extends Component {
 
 		return (
 			<MobilePaymentLayout>
-				<form onSubmit={(event) => this.handleSubmit(event)}>
+				<form onSubmit={(event) => this.onSubmitForm(event)}>
 					<MobilePaymentTitle>Пополнить телефон</MobilePaymentTitle>
 					<InputField>
 						<Label>Телефон</Label>

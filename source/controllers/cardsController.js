@@ -12,6 +12,18 @@ class cardsController {
         this.list = await this.Model.getList();
         return ctx.body = this.list;
     }
+	async createPay(ctx){
+		let cardId = Number(ctx.params['id']);
+		let data = ctx.request.body;
+        let check = await this.Model.updateBalance(cardId, data.amount);
+        if (data.type === "card2card" || data.type === "prepaidCard"){
+            //Прибавляем к балансу карты, где переводы на карту
+	        let sum = -data.amount;
+	        check = await this.Model.updateBalance(Number(data.data), sum);
+	        ctx.request.body.data = check.cardNumber;
+        }
+        return true;
+	}
     async addNewCard(ctx) {
         let data = ctx.request.body;
         let validateStatus = await this.validateCard(data);
@@ -42,7 +54,6 @@ class cardsController {
         return ctx;
     }
     validateCard(info) {
-        console.log(info);
         let check = {};
         if(info.cardNumber.match(/^[0-9]{16}$/)){
             check['cardNumber'] = info.cardNumber;
@@ -56,25 +67,6 @@ class cardsController {
         }
         return check;
     }
-    // temporary function
-    /*generatePage(){
-        let list = '<ul>';
-        for(let card of this.list){
-            list += `<li>
-					<div>
-						<p>Card Number: ${card.cardNumber}</p>
-						<p>Card Balance: ${card.balance}</p>
-					</div>
-				</li>`;
-        }
-        list += '</ul>' +
-            '<form method="post" action="/cards/">' +
-            'Номер карты<input type="text" name="cardNumber" />' +
-            'Баланс<input type="text" name="balance" />' +
-            '<input type="submit">' +
-            '</form>';
-        return list;
-    }*/
 
 }
 module.exports = cardsController;

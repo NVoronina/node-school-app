@@ -63,9 +63,19 @@ router.post('/cards/:id/transactions/', async function(ctx){
 router.post('/cards/:id/pay/', async function(ctx){
 	let updateBalance = await controllerCards.createPay(ctx);
 	if (updateBalance === true) {
+		logger.log('dev', 'transactions go');
 		await controllerTransactions.createTransaction(ctx);
+		ctx.status = 200;
+		ctx.body = {
+			"id": 3,
+			"cardId": 1,
+			"type": "paymentMobile",
+			"data": "+79218908064",
+			"time": "2017-10-13T11:25:16.202Z",
+			"sum": "403"
+		};
 	} else {
-		ctx.body = "Ошибка";
+		ctx.status = 404;
 	}
 });
 app.use(router.routes());
@@ -75,7 +85,7 @@ app.use(async function(ctx, next) {
     const start = new Date();
     await next();
     const ms = new Date() - start;
-    logger.log('info', `${ctx.method} ${ctx.url} - ${ms}ms`);
+    //logger.log('info', `${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
 // error handler

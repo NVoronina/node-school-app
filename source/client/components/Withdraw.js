@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
+import axios from 'axios';
 
 import {Card, Title, Button, Island, Input} from './';
 
@@ -81,6 +82,14 @@ class Withdraw extends Component {
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
+		} else {
+			axios.post(`/cards/${this.props.activeCard.id}/pay/`, {
+				type: 'prepaidCard',
+				amount: this.state.sum,
+				data: this.state.selectedCard.id
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 
 		this.setState({sum: 0});

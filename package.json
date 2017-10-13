@@ -4,10 +4,11 @@
   "description": "Приложение школы Node.js «Кошелёк»",
   "author": "",
   "scripts": {
+    "precommit": "./node_modules/eslint/bin/eslint.js",
     "build": "./node_modules/webpack/bin/webpack.js",
-    "start": "NODE_PATH=. node ./source/index.js -L",
-    "watch": "NODE_PATH=. nodemon --watch source ./public/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_PATH=. node ./source/index.js",
+    "watch": "NODE_PATH=. nodemon --watch source ./source/index.js",
+    "test": "./node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -18,17 +19,22 @@
     "node": "^8.2"
   },
   "dependencies": {
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-loader": "^1.9.0",
+    "html-webpack-plugin": "^2.30.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
     "koa-static": "^4.0.1",
     "lodash": "^4.17.4",
+    "postcss-loader": "^2.0.6",
     "prop-types": "^15.5.10",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "antd": "^2.12.8",
+    "antd": "^2.13.4",
+    "axios": "^0.16.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-emotion": "^7.1.0",
@@ -38,16 +44,20 @@
     "babel-preset-react": "^6.24.1",
     "card-info": "git+https://github.com/iniel/card-info.git",
     "css-loader": "^0.28.7",
-    "emotion": "^7.2.0",
+    "emotion": "^7.3.2",
     "eslint": "^4.7.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-react": "^7.4.0",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "ignore-loader": "^0.1.2",
+    "jest": "^21.2.1",
+    "log4js": "^2.3.5",
     "moment": "^2.18.1",
     "react-emotion": "^7.2.0",
+    "serialize-javascript": "^1.4.0",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.5"
+    "webpack": "^3.6.0"
   }
 }
-

@@ -4,9 +4,10 @@
 
 class transactionsController {
     constructor(){
-        let transactionsModel =  require('./../models/transactionsModel');
+        const transactionsModel =  require('./../models/transactionsModel');
         this.Model = new transactionsModel();
         this.list = false;
+	    const allowedTypes = ['prepaidCard', 'paymentMobile', 'card2Card'];
     }
     async getAllCardTransactions(ctx){
         let cardId = Number(ctx.params['id']);
@@ -18,39 +19,18 @@ class transactionsController {
         let cardId = Number(ctx.params['id']);
         let cardsModel = await require('./../models/cardsModel');
         let cards = new cardsModel();
-        let cardInfo = await cards.getOne(Number(cardId));
+        let cardInfo = await cards.getOne(cardId);
+        let time = (new Date()).toISOString();
         let data = {
             "id":0,
 	        "cardId": cardId,
-	        "type": "prepaidCard",
-	        "data": cardInfo.cardNumber,
-	        "time": "2017-08-9T05:28:31+03:00",
-	        "sum": "4000"
+	        "type": String(ctx.request.body.type),
+	        "data": String(ctx.request.body.data),
+	        "time": time,
+	        "sum": String(ctx.request.body.amount)
         };
         let create = await this.Model.create(data);
         return ctx.body = "все ok";
-    }
-
-    generatePage(info){
-        let list = '<ul>';
-        for(let transaction of info){
-            list += `<li>
-					<div>
-						<p>id: ${transaction.id}</p>
-						<p>cardId: ${transaction.cardId}</p>
-						<p>type: ${transaction.type}</p>
-						<p>data: ${transaction.data}</p>
-						<p>time: ${transaction.time}</p>
-						<p>sum: ${transaction.sum}</p>
-					</div>
-				</li>`;
-        }
-        list += '</ul>' +
-            '<form method="post" action="/cards/2/transactions/">' +
-            'Сумма<input type="text" name="sum" />' +
-            '<input type="submit">' +
-            '</form>';
-        return list;
     }
 
 }

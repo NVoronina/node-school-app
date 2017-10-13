@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
+import axios from 'axios';
 
 import {Island, Title, Button, Input} from './';
 
@@ -126,8 +127,15 @@ class PrepaidContract extends Component {
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
+		} else {
+			axios.post(`/cards/${this.props.activeCard.id}/pay/`, {
+				type: 'prepaidCard',
+				amount: this.state.sum,
+				data: this.props.inactiveCardsList[this.state.activeCardIndex].id
+			}).catch(function (error) {
+				console.log("error in ajax" + error);
+			});
 		}
-
 		this.props.onPaymentSuccess({
 			sum,
 			number: activeCard.number

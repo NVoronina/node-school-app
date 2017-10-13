@@ -1,8 +1,10 @@
 /**
  * Created by Natalia on 28.09.2017.
  */
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
+const logger = require('./../../libs/logger.js')('wallet-app');
+
 
 class transactionsModel{
     constructor(){
@@ -48,12 +50,12 @@ class transactionsModel{
 	    data.id = await this.generateId();
 	    this.jsonFile.push(data);
 	    try {
-		    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile),(err) => {
+		    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile, "", 2),(err) => {
 			    if (err) throw err;
 			    console.log('done');
 		    });
 	    }catch(error) {
-	        console.log('error ' + error);
+	        logger.log('dev', error);
         }
     }
     remove(){
