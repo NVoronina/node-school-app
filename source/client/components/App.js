@@ -23,6 +23,7 @@ injectGlobal([`
 	body {
 		margin: 0
 	}
+
 	#root {
 		height: 100%
 		font-family: 'Open Sans'
@@ -116,9 +117,9 @@ class App extends Component {
 	}
 
 	/**
-	 * Обработчик события редактирования карт
-	 * @param {Boolean} isEditable Признак редактируемости
-	 */
+	* Обработчик события редактирования карт
+	* @param {Boolean} isEditable Признак редактируемости
+	*/
 	onEditChange(isEditable) {
 		const isCardsEditable = !isEditable;
 		this.setState({
@@ -128,8 +129,8 @@ class App extends Component {
 	}
 
 	/**
-	 * Функция вызывает при успешной транзакции
-	 */
+	* Функция вызывает при успешной транзакции
+	*/
 	onTransaction() {
 		axios.get('/cards').then(({data}) => {
 			const cardsList = App.prepareCardsData(data);

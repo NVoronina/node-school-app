@@ -40,9 +40,9 @@ const Footer = styled.footer`
 `;
 
 const CardsBar = ({
-	                  activeCardIndex, cardsList, onCardChange, onEditChange, isCardsEditable, isCardRemoving, onChangeBarMode,
-	                  removeCardId, deleteCard
-                  }) => {
+	activeCardIndex, cardsList, onCardChange, onEditChange, isCardsEditable, isCardRemoving, onChangeBarMode,
+	removeCardId, deleteCard
+}) => {
 	const onCardClick = (index) => {
 		onCardChange && onCardChange(index);
 	};

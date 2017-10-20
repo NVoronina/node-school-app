@@ -42,9 +42,11 @@ const HistoryItem = styled.div`
 	font-size: 15px;
 	white-space: nowrap;
 	min-height: 74px;
+
 	&:nth-child(even) {
 		background-color: #fff;
 	}
+
 	&:nth-child(odd) {
 		background-color: rgba(255, 255, 255, 0.72);
 	}

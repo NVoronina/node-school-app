@@ -108,31 +108,33 @@ class MobilePaymentContract extends Component {
 		if (event) {
 			event.preventDefault();
 		}
+
 		const {sum, phoneNumber, commission} = this.state;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum === 0) {
 			return;
-		} else {
-			let amount = Number(sum) + Number(commission);
-			axios
-				.post(`/cards/${this.props.activeCard.id}/pay/`, {
+		}
+
+		const {activeCard} = this.props;
+		let amount = Number(sum) + Number(commission);
+		axios
+			.post(`/cards/${this.props.activeCard.id}/pay/`, {
 				type: 'paymentMobile',
 				amount: amount,
 				data: phoneNumber
-				})
-				.then(() => this.props.onPaymentSuccess({sum, phoneNumber, commission}))
-				.catch(function (error) {
-					console.log(error);
-				});
-		}
+			})
+			.then(() => this.props.onPaymentSuccess({sum, phoneNumber, commission}))
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 
 	/**
 	 * Обработка изменения значения в input
 	 * @param {Event} event событие изменения значения input
 	 */
-	handleInputChange(event) {
+	onChangeInputValue(event) {
 		if (!event) {
 			return;
 		}
@@ -169,7 +171,7 @@ class MobilePaymentContract extends Component {
 						<InputSum
 							name='sum'
 							value={this.state.sum}
-							onChange={(event) => this.handleInputChange(event)} />
+							onChange={(event) => this.onChangeInputValue(event)} />
 						<Currency>₽</Currency>
 					</InputField>
 					<InputField>
@@ -188,8 +190,7 @@ class MobilePaymentContract extends Component {
 
 MobilePaymentContract.propTypes = {
 	activeCard: PropTypes.shape({
-		id: PropTypes.number,
-		theme: PropTypes.object
+		id: PropTypes.number
 	}).isRequired,
 	onPaymentSuccess: PropTypes.func.isRequired
 };

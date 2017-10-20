@@ -24,17 +24,17 @@ class transactionsModel{
         }
         return this.jsonFile;
     }
+    async getAll(){
+	    let data = await this.loadFile();
+	    return data;
+    }
     async generateId(){
-	    if(this.jsonFile === false) {
-		    await this.loadFile();
-	    }
+	    await this.loadFile();
         let id = this.jsonFile[this.jsonFile.length -1].id;
         return ++id;
     }
     async get(cardId){
-	    if(this.jsonFile === false) {
-		    await this.loadFile();
-	    }
+	    await this.loadFile();
         let data = [];
         for(let transactions of this.jsonFile){
             if(transactions.cardId === cardId){
@@ -44,9 +44,7 @@ class transactionsModel{
         return data;
     }
     async create(data){
-	    if(this.jsonFile === false) {
-		    await this.loadFile();
-	    }
+	    await this.loadFile();
 	    data.id = await this.generateId();
 	    this.jsonFile.push(data);
 	    try {

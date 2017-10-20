@@ -16,7 +16,7 @@ class cardsController {
 		let cardId = Number(ctx.params['id']);
 		let data = ctx.request.body;
         let check = await this.Model.updateBalance(cardId, data.amount);
-        if (data.type === "card2card" || data.type === "prepaidCard"){
+        if (data.type === "withdrawCard" || data.type === "prepaidCard"){
             //Прибавляем к балансу карты, где переводы на карту
 	        let sum = -data.amount;
 	        check = await this.Model.updateBalance(Number(data.data), sum);

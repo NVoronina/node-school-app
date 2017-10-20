@@ -9,3 +9,5 @@ npm i
 ```sh
 npm start
 ```
+#joy validation
+#db sequelize

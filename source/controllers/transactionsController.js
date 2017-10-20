@@ -4,15 +4,22 @@
 
 class transactionsController {
     constructor(){
-        const transactionsModel =  require('./../models/transactionsModel');
+	    let transactionsModel =  require('./../models/transactionsModel');
         this.Model = new transactionsModel();
         this.list = false;
-	    const allowedTypes = ['prepaidCard', 'paymentMobile', 'card2Card'];
+	    let allowedTypes = ['prepaidCard', 'paymentMobile', 'card2Card'];
+    }
+    async getAllTransactions(ctx){
+    	let data = await this.Model.getAll();
+    	console.log(data);
+    	ctx.body = data;
+    	//ctx.status = 200;
+    	return ctx;
     }
     async getAllCardTransactions(ctx){
         let cardId = Number(ctx.params['id']);
         let data = await this.Model.get(cardId);
-        return ctx.body = await this.generatePage(data);
+        return ctx.body = data;
     }
 
     async createTransaction(ctx){
@@ -30,7 +37,9 @@ class transactionsController {
 	        "sum": String(ctx.request.body.amount)
         };
         let create = await this.Model.create(data);
-        return ctx.body = "все ok";
+	    ctx.body = data;
+	    ctx.status = 200;
+        return ctx;
     }
 
 }

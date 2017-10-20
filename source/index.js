@@ -9,8 +9,17 @@ const bodyParser = require('koa-bodyparser')();
 const Router = require('koa-router');
 const router = new Router();
 const fs = require('fs');
-
+const http = require('http');
+//const https = require('https');
+var db;
+const MongoClient = require('mongodb').MongoClient;
+const options = {
+	key: fs.readFileSync('./configs/key.pem'),
+	cert: fs.readFileSync('./configs/cert.pem'),
+};
 //logger
+//joy validation
+//db sequelize
 const logger = require('../libs/logger.js')('wallet-app');
 
 const {renderToStaticMarkup} = require('react-dom/server');
@@ -53,6 +62,9 @@ router.get('/delete/:id', async function(ctx){
     await controllerCards.deleteOneCard(ctx);
 });
 // transactions
+router.get('/transactions/', async function(ctx) {
+	await controllerTransactions.getAllTransactions(ctx);
+});
 router.get('/cards/:id/transactions/', async function(ctx){
     await controllerTransactions.getAllCardTransactions(ctx);
 });
@@ -65,18 +77,8 @@ router.post('/cards/:id/pay/', async function(ctx){
 	if (updateBalance === true) {
 		logger.log('dev', 'transactions go');
 		await controllerTransactions.createTransaction(ctx);
-		ctx.status = 200;
-		ctx.body = {
-			"id": 3,
-			"cardId": 1,
-			"type": "paymentMobile",
-			"data": "+79218908064",
-			"time": "2017-10-13T11:25:16.202Z",
-			"sum": "403"
-		};
-	} else {
-		ctx.status = 404;
 	}
+	return ctx;
 });
 app.use(router.routes());
 
@@ -101,7 +103,9 @@ app.use(async (ctx, next) => {
 });
 app.use(serve('../public'));
 
-app.listen(3000, () => {
-    //console.trace();
-    logger.log('Application started');
+http.createServer(app.callback()).listen(3000, () => {
+	logger.log('Application started on port 3000');
 });
+// https.createServer(options, app.callback()).listen(443, () => {
+// 	logger.log('Application started on port 443');
+// });

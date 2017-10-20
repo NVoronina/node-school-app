@@ -11,56 +11,68 @@ class cardsModel {
         this.jsonFile = false;
     }
     async loadFile(){
-        if(this.jsonFile === false) {
-            this.jsonFile = await new Promise((resolve, reject) => {
-                fs.readFile(this.fileDir, (err, data) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve(JSON.parse(data));
-                })
-            });
-        }
-        return this.jsonFile;
+	    if(this.jsonFile === false) {
+		    this.jsonFile = await new Promise((resolve, reject) => {
+			    fs.readFile(this.fileDir, (err, data) => {
+				    if (err) {
+					    reject(err);
+					    return false;
+				    }
+				    resolve(JSON.parse(data));
+			    })
+		    });
+	    }
+	    return this.jsonFile;
     }
     async getList(){
-        await this.loadFile();
-        return this.jsonFile;
+        let data = await this.loadFile();
+        if(data !== false) {
+	        return this.jsonFile;
+        } else {
+        	return false;
+        }
     }
 	async getOne(cardId){
 		await this.loadFile();
 		for(let card of this.jsonFile){
 			if(Number(card.id) === Number(cardId)){
-				const data = card;
+				let data = card;
 				return data;
 			}
 		}
 		return false;
 	}
     async addOne(data){
-        if(this.jsonFile === false) {
-            await this.loadFile();
-        }
+	    await this.loadFile();
         this.jsonFile.push(data);
-	    try {
-		    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile),(err) => {
-			    if (err) throw err;
+	    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile),(err) => {
+		    if (err) {
+			    logger.log('dev', 'Card not added');
+			    return false;
+		    }else {
 			    logger.log('dev', 'One card added');
-		    });
-	    }catch(error) {
-		    logger.log('dev', 'error one card add');
-	    }
+			    return true;
+			}
+	    });
     }
 
     async deleteOne(id){
-        if(this.jsonFile === false) {
-            await this.loadFile();
-        }
-        if(this.jsonFile.length > id) {
-            this.jsonFile.splice(id, 1);
+        await this.loadFile();
+        let check = this.getOne(id);
+        if(check !== false) {
+        	for(let key in this.jsonFile){
+        		if(Number(this.jsonFile[key].id) === Number(id)){
+			        this.jsonFile.splice(key, 1);
+		        }
+	        }
             await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile, "", 2),(err) => {
-	            if (err) throw err;
-	            logger.log('dev', 'One card delete');
+	            if (err) {
+		            logger.log('dev', 'Card not deleted');
+		            return false;
+	            }else {
+		            logger.log('dev', 'One card delete');
+		            return true;
+	            }
             });
         }else {
             return false;
