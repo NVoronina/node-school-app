@@ -75,7 +75,6 @@ router.post('/cards/:id/pay/', async function(ctx){
 		logger.log('dev', 'transactions go');
 		await controllerTransactions.createTransaction(ctx);
 	}
-	ctx.body='hello';
 	return ctx;
 });
 app.use(router.routes());
@@ -104,6 +103,6 @@ app.use(serve('../public'));
 http.createServer(app.callback()).listen(3000, () => {
 	logger.log('Application started on port 3000');
 });
-// https.createServer(options, app.callback()).listen(443, () => {
-// 	logger.log('Application started on port 443');
-// });
+/*https.createServer(options, app.callback()).listen(443, () => {
+	logger.log('Application started on port 443');
+});*/

@@ -18,13 +18,10 @@ class cardsController {
         let check = await this.Model.updateBalance(cardId, data.amount);
         if (data.type === "withdrawCard" || data.type === "prepaidCard"){
             //Прибавляем к балансу карты, где переводы на карту
-            let cardsModel = require('../models/cardsModel');
-            let cards = new cardsModel();
-            console.log(data.data);
-            let id = cards.getOne(data.data);
 	        let sum = -data.amount;
-	        check = await this.Model.updateBalance(Number(data.data), sum);
-	        ctx.request.body.data = check.cardNumber;
+	        await this.Model.updateBalance(Number(data.data), sum);
+            let card = await this.Model.getOne(Number(data.data));
+            ctx.request.body.data = card.cardNumber;
         }
         return true;
 	}
