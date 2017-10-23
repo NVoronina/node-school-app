@@ -11,15 +11,12 @@ const router = new Router();
 const fs = require('fs');
 const http = require('http');
 //const https = require('https');
-var db;
-const MongoClient = require('mongodb').MongoClient;
-const options = {
+/*const options = {
 	key: fs.readFileSync('./configs/key.pem'),
 	cert: fs.readFileSync('./configs/cert.pem'),
-};
+};*/
 //logger
-//joy validation
-//db sequelize
+
 const logger = require('../libs/logger.js')('wallet-app');
 
 const {renderToStaticMarkup} = require('react-dom/server');
@@ -78,6 +75,7 @@ router.post('/cards/:id/pay/', async function(ctx){
 		logger.log('dev', 'transactions go');
 		await controllerTransactions.createTransaction(ctx);
 	}
+	ctx.body='hello';
 	return ctx;
 });
 app.use(router.routes());

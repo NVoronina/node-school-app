@@ -18,6 +18,10 @@ class cardsController {
         let check = await this.Model.updateBalance(cardId, data.amount);
         if (data.type === "withdrawCard" || data.type === "prepaidCard"){
             //Прибавляем к балансу карты, где переводы на карту
+            let cardsModel = require('../models/cardsModel');
+            let cards = new cardsModel();
+            console.log(data.data);
+            let id = cards.getOne(data.data);
 	        let sum = -data.amount;
 	        check = await this.Model.updateBalance(Number(data.data), sum);
 	        ctx.request.body.data = check.cardNumber;
@@ -26,11 +30,12 @@ class cardsController {
 	}
     async addNewCard(ctx) {
         let data = ctx.request.body;
-        let validateStatus = await this.validateCard(data);
-        if(validateStatus !== false){
-            this.list = await this.Model.addOne(data);
+        let cardData = await this.validateCard(data);
+	    if(cardData !== false){
+	        console.log(cardData);
+            let card = await this.Model.addOne(cardData);
             ctx.status = 201;
-            ctx.body = 'Added';
+            ctx.body = card;
         } else {
             ctx.status = 404;
             ctx.body = 'Something wrong';

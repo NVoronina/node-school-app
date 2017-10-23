@@ -1,63 +1,43 @@
 /**
  * Created by Natalia on 28.09.2017.
  */
-const path = require('path');
-const fs = require('fs');
 const logger = require('./../../libs/logger.js')('wallet-app');
+const db = require('./db');
+const mongoose = require('mongoose');
+const common = require('./common');
 
+class transactionsModel extends common{
+	constructor(){
+		super();
+		let schema = mongoose.Schema({
+			id: {type: Number, unique: true},
+			cardId: Number,
+			type: String,
+			data: String,
+			time: String,
+			sum: String
+		});
+		this.model = mongoose.model("transactions", schema);
+	}
+	async getAllCardsTransaction(id){
+		if(this.db === false){
+			await this.connect();
+		}
+		let list = await new Promise((resolve, reject) => {
+			this.model.find({cardId: id}, (err, info) => {
+				if(err){
+					logger.log('dev', err);
+					reject(err);
+				}
+				resolve(info);
+			});
+		});
+		return list;
+	}
+	remove(){
+		logger.log('dev', 'Попытка удаления транзакции');
+		throw new Error("You can't remove transactions");
+	}
 
-class transactionsModel{
-    constructor(){
-        this.fileDir = path.join(__dirname, '..', '..', 'source/data', 'transactions.json');
-        this.jsonFile = false;
-    }
-    async loadFile(){
-        if(this.jsonFile === false) {
-            this.jsonFile = await new Promise((resolve, reject) => {
-                fs.readFile(this.fileDir, (err, data) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve(JSON.parse(data));
-                })
-            });
-        }
-        return this.jsonFile;
-    }
-    async getAll(){
-	    let data = await this.loadFile();
-	    return data;
-    }
-    async generateId(){
-	    await this.loadFile();
-        let id = this.jsonFile[this.jsonFile.length -1].id;
-        return ++id;
-    }
-    async get(cardId){
-	    await this.loadFile();
-        let data = [];
-        for(let transactions of this.jsonFile){
-            if(transactions.cardId === cardId){
-                data.push(transactions);
-            }
-        }
-        return data;
-    }
-    async create(data){
-	    await this.loadFile();
-	    data.id = await this.generateId();
-	    this.jsonFile.push(data);
-	    try {
-		    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile, "", 2),(err) => {
-			    if (err) throw err;
-			    console.log('done');
-		    });
-	    }catch(error) {
-	        logger.log('dev', error);
-        }
-    }
-    remove(){
-         throw new Error("Попытка удаления транзакции");
-    }
 }
 module.exports = transactionsModel;

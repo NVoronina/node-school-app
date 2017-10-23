@@ -1,99 +1,54 @@
 /**
  * Created by Natalia on 27.09.2017.
  */
-const path = require('path');
-const fs = require('fs');
 const logger = require('./../../libs/logger.js')('wallet-app');
+const db = require('./db');
+const mongoose = require('mongoose');
+const common = require('./common');
 
-class cardsModel {
+class cardsModel extends common{
     constructor(){
-        this.fileDir = path.join(__dirname, '..', '..',  'source/data', 'cards.json');
-        this.jsonFile = false;
-    }
-    async loadFile(){
-	    if(this.jsonFile === false) {
-		    this.jsonFile = await new Promise((resolve, reject) => {
-			    fs.readFile(this.fileDir, (err, data) => {
-				    if (err) {
-					    reject(err);
-					    return false;
-				    }
-				    resolve(JSON.parse(data));
-			    })
-		    });
-	    }
-	    return this.jsonFile;
-    }
-    async getList(){
-        let data = await this.loadFile();
-        if(data !== false) {
-	        return this.jsonFile;
-        } else {
-        	return false;
-        }
-    }
-	async getOne(cardId){
-		await this.loadFile();
-		for(let card of this.jsonFile){
-			if(Number(card.id) === Number(cardId)){
-				let data = card;
-				return data;
-			}
-		}
-		return false;
-	}
-    async addOne(data){
-	    await this.loadFile();
-        this.jsonFile.push(data);
-	    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile),(err) => {
-		    if (err) {
-			    logger.log('dev', 'Card not added');
-			    return false;
-		    }else {
-			    logger.log('dev', 'One card added');
-			    return true;
-			}
+    	super();
+	    let schema = mongoose.Schema({
+		    id: {type: Number,unique: true},
+		    cardNumber: String,
+		    balance: Number
 	    });
+	    this.model = mongoose.model("cards", schema);
+
     }
 
     async deleteOne(id){
-        await this.loadFile();
-        let check = this.getOne(id);
-        if(check !== false) {
-        	for(let key in this.jsonFile){
-        		if(Number(this.jsonFile[key].id) === Number(id)){
-			        this.jsonFile.splice(key, 1);
-		        }
-	        }
-            await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile, "", 2),(err) => {
-	            if (err) {
-		            logger.log('dev', 'Card not deleted');
-		            return false;
-	            }else {
-		            logger.log('dev', 'One card delete');
-		            return true;
-	            }
-            });
+	    if(this.db === false){
+		    await this.connect();
+	    }
+	    let check = await this.getOne(id);
+        if(check) {
+	        await this.model.findOneAndRemove({_id:check._id});
+			return true;
         }else {
             return false;
         }
     }
     async updateBalance(id, sum){
-	    this.jsonFile = await this.loadFile();
-	    const cardData = await this.getOne(id);
+	    if(this.db === false){
+		    await this.connect();
+	    }
+	    console.log(id);
+	    let cardData = await this.getOne(id);
 	    if(cardData !== false) {
-	    	for(let card of this.jsonFile){
-	    		if(Number(card.id) === Number(id) ){
-				    let amount = 0;
-				    amount = card["balance"] - sum;
-				    card.balance = amount;
-				    await fs.writeFile(this.fileDir, JSON.stringify(this.jsonFile, "", 2),(err) => {
-					    if (err) logger.log('dev', 'card balance not updated');
-					    logger.log('dev', 'card balance updated');
-				    });
-				    return cardData;
-			    }
-		    }
+		    cardData.balance = cardData.balance - sum;
+		    let updatedCard = await new Promise((resolve, reject) => {
+			    this.model.where({_id: cardData._id}).update(cardData, (err, info) => {
+				    if(err){
+					    logger.log('dev', 'Card not added');
+					    reject(err);
+				    }
+				    logger.log('dev', 'One card added');
+				    resolve(info);
+			    });
+		    });
+		    return updatedCard;
 	    }else {
 		    return false;
 	    }
