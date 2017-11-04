@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("react"), require("prop-types"), require("axios"), require("react-dom/server"), require("emotion-server"), require("serialize-javascript"), require("react-emotion"), require("rc-select"), require("classnames"), require("warning"), require("moment"), require("emotion"), require("card-info")) : factory(root["react"], root["prop-types"], root["axios"], root["react-dom/server"], root["emotion-server"], root["serialize-javascript"], root["react-emotion"], root["rc-select"], root["classnames"], root["warning"], root["moment"], root["emotion"], root["card-info"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_20__, __WEBPACK_EXTERNAL_MODULE_49__, __WEBPACK_EXTERNAL_MODULE_50__, __WEBPACK_EXTERNAL_MODULE_51__, __WEBPACK_EXTERNAL_MODULE_53__, __WEBPACK_EXTERNAL_MODULE_107__, __WEBPACK_EXTERNAL_MODULE_108__, __WEBPACK_EXTERNAL_MODULE_110__, __WEBPACK_EXTERNAL_MODULE_124__, __WEBPACK_EXTERNAL_MODULE_128__, __WEBPACK_EXTERNAL_MODULE_129__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_49__, __WEBPACK_EXTERNAL_MODULE_50__, __WEBPACK_EXTERNAL_MODULE_51__, __WEBPACK_EXTERNAL_MODULE_53__, __WEBPACK_EXTERNAL_MODULE_107__, __WEBPACK_EXTERNAL_MODULE_108__, __WEBPACK_EXTERNAL_MODULE_110__, __WEBPACK_EXTERNAL_MODULE_125__, __WEBPACK_EXTERNAL_MODULE_129__, __WEBPACK_EXTERNAL_MODULE_130__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -166,7 +166,16 @@ Object.defineProperty(exports, 'CardsBar', {
   }
 });
 
-var _CardEdit = __webpack_require__(114);
+var _CardsAdd = __webpack_require__(114);
+
+Object.defineProperty(exports, 'CardsAdd', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_CardsAdd).default;
+  }
+});
+
+var _CardEdit = __webpack_require__(115);
 
 Object.defineProperty(exports, 'CardEdit', {
   enumerable: true,
@@ -175,7 +184,7 @@ Object.defineProperty(exports, 'CardEdit', {
   }
 });
 
-var _CardDelete = __webpack_require__(115);
+var _CardDelete = __webpack_require__(116);
 
 Object.defineProperty(exports, 'CardDelete', {
   enumerable: true,
@@ -184,7 +193,7 @@ Object.defineProperty(exports, 'CardDelete', {
   }
 });
 
-var _Prepaid = __webpack_require__(116);
+var _Prepaid = __webpack_require__(117);
 
 Object.defineProperty(exports, 'Prepaid', {
   enumerable: true,
@@ -193,7 +202,7 @@ Object.defineProperty(exports, 'Prepaid', {
   }
 });
 
-var _MobilePayment = __webpack_require__(119);
+var _MobilePayment = __webpack_require__(120);
 
 Object.defineProperty(exports, 'MobilePayment', {
   enumerable: true,
@@ -202,7 +211,7 @@ Object.defineProperty(exports, 'MobilePayment', {
   }
 });
 
-var _Withdraw = __webpack_require__(122);
+var _Withdraw = __webpack_require__(123);
 
 Object.defineProperty(exports, 'Withdraw', {
   enumerable: true,
@@ -211,7 +220,7 @@ Object.defineProperty(exports, 'Withdraw', {
   }
 });
 
-var _History = __webpack_require__(123);
+var _History = __webpack_require__(124);
 
 Object.defineProperty(exports, 'History', {
   enumerable: true,
@@ -220,7 +229,7 @@ Object.defineProperty(exports, 'History', {
   }
 });
 
-var _Header = __webpack_require__(125);
+var _Header = __webpack_require__(126);
 
 Object.defineProperty(exports, 'Header', {
   enumerable: true,
@@ -229,7 +238,7 @@ Object.defineProperty(exports, 'Header', {
   }
 });
 
-var _UserInfo = __webpack_require__(126);
+var _UserInfo = __webpack_require__(127);
 
 Object.defineProperty(exports, 'UserInfo', {
   enumerable: true,
@@ -238,7 +247,7 @@ Object.defineProperty(exports, 'UserInfo', {
   }
 });
 
-var _App = __webpack_require__(127);
+var _App = __webpack_require__(128);
 
 Object.defineProperty(exports, 'App', {
   enumerable: true,
@@ -383,7 +392,7 @@ module.exports = $export;
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(6);
-var createDesc = __webpack_require__(16);
+var createDesc = __webpack_require__(17);
 module.exports = __webpack_require__(7) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
@@ -409,7 +418,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var store = __webpack_require__(25)('wks');
-var uid = __webpack_require__(18);
+var uid = __webpack_require__(19);
 var Symbol = __webpack_require__(4).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
@@ -458,6 +467,12 @@ module.exports = function (exec) {
 /* 16 */
 /***/ (function(module, exports) {
 
+module.exports = require("axios");
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
 module.exports = function (bitmap, value) {
   return {
     enumerable: !(bitmap & 1),
@@ -469,7 +484,7 @@ module.exports = function (bitmap, value) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
@@ -482,7 +497,7 @@ module.exports = Object.keys || function keys(O) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 var id = 0;
@@ -493,17 +508,11 @@ module.exports = function (key) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = require("axios");
 
 /***/ }),
 /* 21 */
@@ -551,7 +560,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var shared = __webpack_require__(25)('keys');
-var uid = __webpack_require__(18);
+var uid = __webpack_require__(19);
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
@@ -927,8 +936,8 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(19);
-var createDesc = __webpack_require__(16);
+var pIE = __webpack_require__(20);
+var createDesc = __webpack_require__(17);
 var toIObject = __webpack_require__(11);
 var toPrimitive = __webpack_require__(21);
 var has = __webpack_require__(8);
@@ -1561,9 +1570,9 @@ module.exports = function (it) {
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys = __webpack_require__(17);
+var getKeys = __webpack_require__(18);
 var gOPS = __webpack_require__(27);
-var pIE = __webpack_require__(19);
+var pIE = __webpack_require__(20);
 var toObject = __webpack_require__(41);
 var IObject = __webpack_require__(39);
 var $assign = Object.assign;
@@ -1839,7 +1848,7 @@ module.exports = function (TO_STRING) {
 "use strict";
 
 var create = __webpack_require__(30);
-var descriptor = __webpack_require__(16);
+var descriptor = __webpack_require__(17);
 var setToStringTag = __webpack_require__(31);
 var IteratorPrototype = {};
 
@@ -1858,7 +1867,7 @@ module.exports = function (Constructor, NAME, next) {
 
 var dP = __webpack_require__(6);
 var anObject = __webpack_require__(13);
-var getKeys = __webpack_require__(17);
+var getKeys = __webpack_require__(18);
 
 module.exports = __webpack_require__(7) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
@@ -2013,7 +2022,7 @@ var META = __webpack_require__(92).KEY;
 var $fails = __webpack_require__(15);
 var shared = __webpack_require__(25);
 var setToStringTag = __webpack_require__(31);
-var uid = __webpack_require__(18);
+var uid = __webpack_require__(19);
 var wks = __webpack_require__(12);
 var wksExt = __webpack_require__(32);
 var wksDefine = __webpack_require__(33);
@@ -2022,12 +2031,12 @@ var isArray = __webpack_require__(94);
 var anObject = __webpack_require__(13);
 var toIObject = __webpack_require__(11);
 var toPrimitive = __webpack_require__(21);
-var createDesc = __webpack_require__(16);
+var createDesc = __webpack_require__(17);
 var _create = __webpack_require__(30);
 var gOPNExt = __webpack_require__(95);
 var $GOPD = __webpack_require__(47);
 var $DP = __webpack_require__(6);
-var $keys = __webpack_require__(17);
+var $keys = __webpack_require__(18);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
 var gOPN = gOPNExt.f;
@@ -2151,7 +2160,7 @@ if (!USE_NATIVE) {
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
   __webpack_require__(46).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(19).f = $propertyIsEnumerable;
+  __webpack_require__(20).f = $propertyIsEnumerable;
   __webpack_require__(27).f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__(28)) {
@@ -2242,7 +2251,7 @@ setToStringTag(global.JSON, 'JSON', true);
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var META = __webpack_require__(18)('meta');
+var META = __webpack_require__(19)('meta');
 var isObject = __webpack_require__(14);
 var has = __webpack_require__(8);
 var setDesc = __webpack_require__(6).f;
@@ -2302,9 +2311,9 @@ var meta = module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(17);
+var getKeys = __webpack_require__(18);
 var gOPS = __webpack_require__(27);
-var pIE = __webpack_require__(19);
+var pIE = __webpack_require__(20);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -2627,7 +2636,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CardLayout = /*#__PURE__*/(0, _react4.default)('div', 'css-CardLayout-1fkpcd70', [], [function (_ref) {
+var CardLayout = /*#__PURE__*/(0, _react4.default)('div', 'css-CardLayout-1lszumj0', [], [function (_ref) {
 	var isSingle = _ref.isSingle;
 	return isSingle ? 0 : '15px';
 }, function (_ref2) {
@@ -2648,7 +2657,7 @@ var CardLayout = /*#__PURE__*/(0, _react4.default)('div', 'css-CardLayout-1fkpcd
 	};
 });
 
-var CardLogo = /*#__PURE__*/(0, _react4.default)('div', 'css-CardLogo-1fkpcd71', [], [function (_ref3) {
+var CardLogo = /*#__PURE__*/(0, _react4.default)('div', 'css-CardLogo-1lszumj1', [], [function (_ref3) {
 	var url = _ref3.url;
 	return url;
 }, function (_ref4) {
@@ -2666,7 +2675,7 @@ var CardLogo = /*#__PURE__*/(0, _react4.default)('div', 'css-CardLogo-1fkpcd71',
 	};
 });
 
-var CardNumber = /*#__PURE__*/(0, _react4.default)('div', 'css-CardNumber-1fkpcd72', [], [function (_ref5) {
+var CardNumber = /*#__PURE__*/(0, _react4.default)('div', 'css-CardNumber-1lszumj2', [], [function (_ref5) {
 	var active = _ref5.active,
 	    textColor = _ref5.textColor;
 	return active ? textColor : 'rgba(255, 255, 255, 0.6)';
@@ -2679,7 +2688,7 @@ var CardNumber = /*#__PURE__*/(0, _react4.default)('div', 'css-CardNumber-1fkpcd
 	};
 });
 
-var CardType = /*#__PURE__*/(0, _react4.default)('div', 'css-CardType-1fkpcd73', [], [function (_ref6) {
+var CardType = /*#__PURE__*/(0, _react4.default)('div', 'css-CardType-1lszumj3', [], [function (_ref6) {
 	var url = _ref6.url;
 	return url;
 }, function (_ref7) {
@@ -2696,19 +2705,7 @@ var CardType = /*#__PURE__*/(0, _react4.default)('div', 'css-CardType-1fkpcd73',
 	};
 });
 
-var NewCardLayout = /*#__PURE__*/(0, _react4.default)(CardLayout, 'css-NewCardLayout-1fkpcd74', [], [], function createEmotionStyledRules() {
-	return {
-		'backgroundColor': 'transparent',
-		'backgroundImage': 'url(\'/assets/cards-add.svg\')',
-		'backgroundRepeat': 'no-repeat',
-		'backgroundPosition': 'center',
-		'WebkitBoxSizing': 'border-box',
-		'boxSizing': 'border-box',
-		'border': '2px dashed rgba(255, 255, 255, 0.2)'
-	};
-});
-
-var CardSelect = /*#__PURE__*/(0, _react4.default)(_.Select, 'css-CardSelect-1fkpcd75', [], [], function createEmotionStyledRules() {
+var CardSelect = /*#__PURE__*/(0, _react4.default)(_.Select, 'css-CardSelect-1lszumj4', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '100%',
 		'marginBottom': '15px'
@@ -2773,7 +2770,7 @@ var Card = function (_Component) {
 			    onChangeBarMode = _props.onChangeBarMode;
 
 			if (type === 'new') {
-				return _react2.default.createElement(NewCardLayout, null);
+				return _react2.default.createElement(_.CardsAdd, null);
 			}
 
 			if (type === 'select') {
@@ -3022,6 +3019,367 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _react3 = __webpack_require__(2);
+
+var _react4 = _interopRequireDefault(_react3);
+
+var _axios = __webpack_require__(16);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _ = __webpack_require__(3);
+
+var _reactModal = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-modal\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
+
+var _reactNotifications = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-notifications\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CardsAddStyle = {
+	content: {
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-40%, -40%)'
+	}
+};
+var CardLayout = /*#__PURE__*/(0, _react4.default)('div', 'css-CardLayout-13h5mel0', [], [function (_ref) {
+	var isSingle = _ref.isSingle;
+	return isSingle ? 0 : '15px';
+}, function (_ref2) {
+	var bgColor = _ref2.bgColor,
+	    active = _ref2.active;
+	return active ? bgColor : 'rgba(255, 255, 255, 0.1)';
+}], function createEmotionStyledRules(x0, x1) {
+	return {
+		'position': 'relative',
+		'width': '260px',
+		'height': '164px',
+		'WebkitBoxSizing': 'border-box',
+		'boxSizing': 'border-box',
+		'marginBottom': x0,
+		'padding': '25px 20px 20px 25px',
+		'borderRadius': '4px',
+		'backgroundColor': x1
+	};
+});
+var NewCardLayout = /*#__PURE__*/(0, _react4.default)(CardLayout, 'css-NewCardLayout-13h5mel1', [], [], function createEmotionStyledRules() {
+	return {
+		'backgroundColor': 'transparent',
+		'backgroundImage': 'url(\'/assets/cards-add.svg\')',
+		'backgroundRepeat': 'no-repeat',
+		'backgroundPosition': 'center',
+		'WebkitBoxSizing': 'border-box',
+		'boxSizing': 'border-box',
+		'border': '2px dashed rgba(255, 255, 255, 0.2)'
+	};
+});
+var ModalTitle = /*#__PURE__*/(0, _react4.default)(_.Title, 'css-ModalTitle-13h5mel2', [], [], function createEmotionStyledRules() {
+	return {
+		'background': 'dimgray',
+		'color': '#fff',
+		'position': 'absolute',
+		'left': '0',
+		'top': '0',
+		'padding': '.2em',
+		'textAlign': 'center',
+		'width': '100%'
+	};
+});
+var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-13h5mel3', [], [], function createEmotionStyledRules() {
+	return {
+		'display': '-webkit-box; display: -ms-flexbox; display: flex',
+		'WebkitBoxAlign': 'center',
+		'msFlexAlign': 'center',
+		'alignItems': 'center',
+		'marginBottom': '26px'
+	};
+});
+
+var Label = /*#__PURE__*/(0, _react4.default)('div', 'css-Label-13h5mel4', [], [], function createEmotionStyledRules() {
+	return {
+		'fontSize': '15px',
+		'color': 'dimgray',
+		'width': '100%'
+	};
+});
+var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-13h5mel5', [], [], function createEmotionStyledRules() {
+	return {
+		'fontSize': '13px',
+		'color': 'dimgray',
+		'marginLeft': '12px'
+	};
+});
+var InputCardNumber = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-InputCardNumber-13h5mel6', [], [], function createEmotionStyledRules() {
+	return {
+		'width': '225px'
+	};
+});
+
+var InputBalance = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-InputBalance-13h5mel7', [], [], function createEmotionStyledRules() {
+	return {
+		'width': '160px'
+	};
+});
+var ButtonClose = /*#__PURE__*/(0, _react4.default)(_.Button, 'css-ButtonClose-13h5mel8', [], [], function createEmotionStyledRules() {
+	return {
+		'textAlign': 'center',
+		'margin': '0 2em 0 1em'
+	};
+});
+var ButtonSuccess = /*#__PURE__*/(0, _react4.default)(_.Button, 'css-ButtonSuccess-13h5mel9', [], [], function createEmotionStyledRules() {
+	return {
+		'textAlign': 'center',
+		'margin': '0 1em 0 2em'
+	};
+});
+var FormContent = /*#__PURE__*/(0, _react4.default)('div', 'css-FormContent-13h5mel10', [], [], function createEmotionStyledRules() {
+	return {
+		'paddingTop': '5em'
+	};
+});
+
+var CardsAdd = function (_Component) {
+	_inherits(CardsAdd, _Component);
+
+	/**
+  * Конструктор
+  *
+  * @param {Object} props свойства компонента
+  */
+	function CardsAdd(props) {
+		_classCallCheck(this, CardsAdd);
+
+		var _this = _possibleConstructorReturn(this, (CardsAdd.__proto__ || Object.getPrototypeOf(CardsAdd)).call(this, props));
+
+		_this.state = {
+			modalIsOpen: false,
+			cardNumber: "",
+			balance: "0"
+		};
+
+		_this.openModal = _this.openModal.bind(_this);
+		_this.closeModal = _this.closeModal.bind(_this);
+
+		return _this;
+	}
+
+	_createClass(CardsAdd, [{
+		key: 'openModal',
+		value: function openModal() {
+			this.setState({ modalIsOpen: true });
+		}
+
+		/*afterOpenModal() {
+   // references are now sync'd and can be accessed.
+   this.subtitle.style.color = 'dimgray';
+   }*/
+
+	}, {
+		key: 'closeModal',
+		value: function closeModal() {
+			this.setState({ modalIsOpen: false });
+		}
+	}, {
+		key: 'onChangeInputValue',
+		value: function onChangeInputValue(event) {
+			if (!event) {
+				return;
+			}
+
+			var _event$target = event.target,
+			    name = _event$target.name,
+			    value = _event$target.value;
+
+
+			this.setState(_defineProperty({}, name, value));
+		}
+	}, {
+		key: 'onSubmitForm',
+		value: function onSubmitForm(event) {
+			var _this2 = this;
+
+			if (event) {
+				event.preventDefault();
+			}
+
+			var _state = this.state,
+			    cardNumber = _state.cardNumber,
+			    balance = _state.balance;
+
+			console.log(cardNumber + ' ' + balance);
+			_axios2.default.post('/cards/', {
+				balance: balance,
+				cardNumber: cardNumber
+			}).then(function (data) {
+				if (data.status === 201) {
+					console.log(data.status);
+					_this2.closeModal();
+					_reactNotifications.NotificationManager.success('Карта успешно создана', 'Title here');
+					_this2.props.onAddCardSuccess({ balance: balance, cardNumber: cardNumber });
+				} else {
+					_reactNotifications.NotificationManager.error('Ошибка создания карты', 'Click me!');
+				}
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	}, {
+		key: 'onErrorNotification',
+		value: function onErrorNotification() {
+			return _react2.default.createElement(
+				Notification,
+				null,
+				_react2.default.createElement(
+					'p',
+					null,
+					'\u041E\u0448\u0438\u0431\u043A\u0430 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F'
+				)
+			);
+		}
+	}, {
+		key: 'onSuccessNotification',
+		value: function onSuccessNotification() {
+			return _react2.default.createElement(
+				Notification,
+				null,
+				_react2.default.createElement(
+					'p',
+					null,
+					'\u041A\u0430\u0440\u0442\u0430 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430'
+				)
+			);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this3 = this;
+
+			return _react2.default.createElement(
+				NewCardLayout,
+				{
+					onClick: this.openModal
+				},
+				_react2.default.createElement(
+					_reactModal2.default,
+					{
+						isOpen: this.state.modalIsOpen,
+						onRequestClose: this.closeModal,
+						style: CardsAddStyle
+					},
+					_react2.default.createElement(
+						ModalTitle,
+						null,
+						'\u041D\u043E\u0432\u0430\u044F \u043A\u0430\u0440\u0442\u0430'
+					),
+					_react2.default.createElement(
+						FormContent,
+						null,
+						_react2.default.createElement(
+							'div',
+							null,
+							'\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u043A\u0430\u0440\u0442\u044B \u0438\u043B\u0438 \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0439\u0442\u0435 \u043A\u0430\u043C\u0435\u0440\u0443'
+						),
+						_react2.default.createElement(
+							'form',
+							{ onSubmit: function onSubmit(event) {
+									return _this3.onSubmitForm(event);
+								} },
+							_react2.default.createElement(
+								InputField,
+								null,
+								_react2.default.createElement(
+									Label,
+									null,
+									'\u041D\u043E\u043C\u0435\u0440 \u043A\u0430\u0440\u0442\u044B'
+								),
+								_react2.default.createElement(InputCardNumber, {
+									value: this.state.cardNumber,
+									onChange: function onChange(event) {
+										return _this3.onChangeInputValue(event);
+									},
+									placeholder: '1000 2000 3000 4000',
+									name: 'cardNumber' })
+							),
+							_react2.default.createElement(
+								InputField,
+								null,
+								_react2.default.createElement(
+									Label,
+									null,
+									'\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0431\u0430\u043B\u0430\u043D\u0441'
+								),
+								_react2.default.createElement(InputBalance, {
+									value: this.state.balance,
+									onChange: function onChange(event) {
+										return _this3.onChangeInputValue(event);
+									},
+									placeholder: '1000',
+									name: 'balance' }),
+								_react2.default.createElement(
+									Currency,
+									null,
+									'\u20BD'
+								)
+							),
+							_react2.default.createElement(
+								ButtonSuccess,
+								{ bgColor: '#108051', textColor: '#fff' },
+								'\u0421\u043E\u0437\u0434\u0430\u0442\u044C'
+							)
+						),
+						_react2.default.createElement(
+							ButtonClose,
+							{ bgColor: '#c22f24', textColor: '#fff', onClick: this.closeModal, type: 'reset' },
+							'\u0417\u0430\u043A\u0440\u044B\u0442\u044C'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return CardsAdd;
+}(_react.Component);
+
+CardsAdd.propTypes = {
+	onAddCardSuccess: _propTypes2.default.func.isRequired
+};
+exports.default = CardsAdd;
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -3070,7 +3428,7 @@ CardEdit.propTypes = {
 exports.default = CardEdit;
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3212,7 +3570,7 @@ CardDelete.propTypes = {
 exports.default = CardDelete;
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3232,11 +3590,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _PrepaidContract = __webpack_require__(117);
+var _PrepaidContract = __webpack_require__(118);
 
 var _PrepaidContract2 = _interopRequireDefault(_PrepaidContract);
 
-var _PrepaidSuccess = __webpack_require__(118);
+var _PrepaidSuccess = __webpack_require__(119);
 
 var _PrepaidSuccess2 = _interopRequireDefault(_PrepaidSuccess);
 
@@ -3338,7 +3696,7 @@ Prepaid.propTypes = {
 exports.default = Prepaid;
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3362,7 +3720,7 @@ var _react3 = __webpack_require__(2);
 
 var _react4 = _interopRequireDefault(_react3);
 
-var _axios = __webpack_require__(20);
+var _axios = __webpack_require__(16);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -3691,7 +4049,7 @@ PrepaidContract.propTypes = {
 exports.default = PrepaidContract;
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3879,7 +4237,7 @@ PrepaidSuccess.propTypes = {
 exports.default = PrepaidSuccess;
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3899,11 +4257,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _MobilePaymentContract = __webpack_require__(120);
+var _MobilePaymentContract = __webpack_require__(121);
 
 var _MobilePaymentContract2 = _interopRequireDefault(_MobilePaymentContract);
 
-var _MobilePaymentSuccess = __webpack_require__(121);
+var _MobilePaymentSuccess = __webpack_require__(122);
 
 var _MobilePaymentSuccess2 = _interopRequireDefault(_MobilePaymentSuccess);
 
@@ -4006,7 +4364,7 @@ MobilePayment.propTypes = {
 exports.default = MobilePayment;
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4030,7 +4388,7 @@ var _react3 = __webpack_require__(2);
 
 var _react4 = _interopRequireDefault(_react3);
 
-var _axios = __webpack_require__(20);
+var _axios = __webpack_require__(16);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -4344,7 +4702,7 @@ MobilePaymentContract.propTypes = {
 exports.default = MobilePaymentContract;
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4544,7 +4902,7 @@ MobilePaymentSuccess.propTypes = {
 exports.default = MobilePaymentSuccess;
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4568,7 +4926,7 @@ var _react3 = __webpack_require__(2);
 
 var _react4 = _interopRequireDefault(_react3);
 
-var _axios = __webpack_require__(20);
+var _axios = __webpack_require__(16);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -4775,7 +5133,7 @@ Withdraw.propTypes = {
 exports.default = Withdraw;
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4797,7 +5155,7 @@ var _react3 = __webpack_require__(2);
 
 var _react4 = _interopRequireDefault(_react3);
 
-var _moment = __webpack_require__(124);
+var _moment = __webpack_require__(125);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -4999,13 +5357,13 @@ History.propTypes = {
 exports.default = History;
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = require("moment");
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5095,7 +5453,7 @@ Header.propTypes = {
 exports.default = Header;
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5145,7 +5503,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5165,25 +5523,25 @@ var _react3 = __webpack_require__(2);
 
 var _react4 = _interopRequireDefault(_react3);
 
-var _emotion = __webpack_require__(128);
+var _emotion = __webpack_require__(129);
 
-var _cardInfo = __webpack_require__(129);
+var _cardInfo = __webpack_require__(130);
 
 var _cardInfo2 = _interopRequireDefault(_cardInfo);
 
-var _axios = __webpack_require__(20);
+var _axios = __webpack_require__(16);
 
 var _axios2 = _interopRequireDefault(_axios);
 
 var _ = __webpack_require__(3);
 
-__webpack_require__(130);
+__webpack_require__(131);
 
-var _cards = __webpack_require__(131);
+var _cards = __webpack_require__(132);
 
 var _cards2 = _interopRequireDefault(_cards);
 
-var _transactions = __webpack_require__(132);
+var _transactions = __webpack_require__(133);
 
 var _transactions2 = _interopRequireDefault(_transactions);
 
@@ -5470,31 +5828,31 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = require("emotion");
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = require("card-info");
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports) {
 
 module.exports = [{"id":1,"cardNumber":"546925000000000","balance":230328},{"id":2,"cardNumber":"676230000000000","balance":0},{"id":3,"cardNumber":"405870000000000","balance":700},{"id":4,"cardNumber":"550064000000000","balance":2},{"id":5,"cardNumber":"437784000000000","balance":4545},{"id":6,"cardNumber":"676803000000000","balance":120}]
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports) {
 
 module.exports = [{"id":1,"cardId":1,"type":"prepaidCard","data":"220003000000003","time":"2017-08-9T05:28:31+03:00","sum":"2345"},{"id":2,"cardId":1,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-08-8T06:28:31+03:00","sum":"-25"},{"id":3,"cardId":1,"type":"paymentMobile","data":"+79218908064","time":"2017-10-13T11:25:16.202Z","sum":"403"},{"id":4,"cardId":2,"type":"paymentMobile","data":"+79218908064","time":"2017-10-13T11:39:39.318Z","sum":"110"},{"id":5,"cardId":1,"type":"paymentMobile","data":"+79218908064","time":"2017-10-13T14:10:56.469Z","sum":"403"},{"id":6,"cardId":1,"type":"paymentMobile","data":"+79218908064","time":"2017-10-13T14:12:45.627Z","sum":"582"},{"id":7,"cardId":1,"type":"paymentMobile","data":"+79218908064","time":"2017-10-13T14:25:06.684Z","sum":"103"},{"id":8,"cardId":3,"type":"withdrawCard","data":"676230000000000","time":"2017-10-13T14:26:26.942Z","sum":"400"},{"id":9,"cardId":1,"type":"prepaidCard","data":"676230000000000","time":"2017-10-13T14:36:38.036Z","sum":"1000"},{"id":10,"cardId":1,"type":"prepaidCard","data":"676230000000000","time":"2017-10-13T14:42:12.258Z","sum":"3100"},{"id":11,"cardId":1,"type":"paymentMobile","data":"+79218908064","time":"2017-10-19T10:24:09.506Z","sum":"433"}]

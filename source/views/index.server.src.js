@@ -4,6 +4,7 @@ import {extractCritical} from 'emotion-server';
 import serialize from 'serialize-javascript';
 import {App} from '../client/components';
 
+
 module.exports = (appData) => {
 	const app = renderToString(<App data={appData} />);
 	const {html, ids, css} = extractCritical(app);

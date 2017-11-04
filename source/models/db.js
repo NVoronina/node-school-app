@@ -5,6 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 const logger = require('./../../libs/logger.js')('wallet-app');
 const mongoose = require('mongoose');
 
+
 class db {
 	constructor(){
 		this.db = false;

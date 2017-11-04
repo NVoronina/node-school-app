@@ -34,7 +34,6 @@ class cardsModel extends common{
 	    if(this.db === false){
 		    await this.connect();
 	    }
-	    console.log(id);
 	    let cardData = await this.getOne(id);
 	    if(cardData !== false) {
 		    cardData.balance = cardData.balance - sum;

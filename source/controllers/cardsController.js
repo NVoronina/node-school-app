@@ -29,12 +29,11 @@ class cardsController {
         let data = ctx.request.body;
         let cardData = await this.validateCard(data);
 	    if(cardData !== false){
-	        console.log(cardData);
             let card = await this.Model.addOne(cardData);
             ctx.status = 201;
             ctx.body = card;
         } else {
-            ctx.status = 404;
+		    ctx.status = 404;
             ctx.body = 'Something wrong';
 
         }
@@ -62,7 +61,7 @@ class cardsController {
         } else {
             return false;
         }
-        if(info.balance.match(/[0-9]/)){
+        if(info.balance.match(/[0-9]+/)){
             check['balance'] = info.balance;
         } else {
             return false;
