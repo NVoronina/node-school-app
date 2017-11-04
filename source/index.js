@@ -10,11 +10,8 @@ const Router = require('koa-router');
 const router = new Router();
 const fs = require('fs');
 const http = require('http');
-//const https = require('https');
-/*const options = {
-	key: fs.readFileSync('./configs/key.pem'),
-	cert: fs.readFileSync('./configs/cert.pem'),
-};*/
+const https = require('https');
+
 //logger
 
 const logger = require('../libs/logger.js')('wallet-app');
@@ -68,6 +65,9 @@ router.get('/cards/:id/transactions/', async function(ctx){
 router.post('/cards/:id/transactions/', async function(ctx){
     await controllerTransactions.createTransaction(ctx);
 });
+router.get('/cards/:id/file-transactions/', async function(ctx){
+	await controllerTransactions.getCardsTransactionCsv(ctx);
+});
 // pay
 router.post('/cards/:id/pay/', async function(ctx){
 	let updateBalance = await controllerCards.createPay(ctx);
@@ -103,6 +103,10 @@ app.use(serve('../public'));
 http.createServer(app.callback()).listen(3000, () => {
 	logger.log('Application started on port 3000');
 });
-/*https.createServer(options, app.callback()).listen(443, () => {
+/*https.createServer({
+		key: fs.readFileSync('./configs/key.pem'),
+		cert: fs.readFileSync('./configs/cert.pem'),
+	},
+	app.callback()).listen(443, () => {
 	logger.log('Application started on port 443');
 });*/
