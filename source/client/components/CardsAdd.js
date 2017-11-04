@@ -163,7 +163,7 @@ class CardsAdd extends Component {
 								<InputCardNumber
 									value={this.state.cardNumber}
 									onChange={(event) => this.onChangeInputValue(event)}
-									placeholder="1000 2000 3000 4000"
+									placeholder="2000 2000 3000 4000"
 									name="cardNumber"/>
 							</InputField>
 							<InputField>
